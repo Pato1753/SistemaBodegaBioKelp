@@ -35,6 +35,7 @@ class Cliente(models.Model):
     id_cliente = models.AutoField(primary_key=True)
     # Diagrama: string nombre, rut, pais, correo, telefono
     nombre = models.CharField(max_length=150)
+    apellido = models.CharField(max_length=150)
     rut = models.CharField(max_length=12, unique=True)
     pais = models.CharField(max_length=50)
     correo = models.EmailField()

@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes</title>
+    <link rel="stylesheet" href="{% static 'css/clientes.css' %}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon"></span>
+            <span class="logo-text">Biokelp</span>
+        </div>
+
+        <nav class="menu">
+            <a href="#">Inicio</a>
+            <a href="#" class="active">Clientes</a>
+            <a href="{% url 'metrica' %}">Alertas y Reportes</a>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="content">
+        <h1>Gestión de Clientes</h1>
+        <p class="sub">Seleccione una opción para continuar.</p>
+
+        <div class="btn-container">
+            <a class="btn green" href="{% url 'verCliente' %}">Ver Clientes</a>
+            <a class="btn gray" href="{% url 'registrarCliente' %}">Registrar Cliente</a>
+        </div>
+    </main>
+
+</body>
+</html>

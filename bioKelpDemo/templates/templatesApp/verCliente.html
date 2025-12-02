@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Clientes</title>
+    <link rel="stylesheet" href="{% static 'css/ver_cliente.css' %}">
+</head>
+<body>
+
+    <!-- NAV -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon"></span>
+            <span class="logo-text">Biokelp</span>
+        </div>
+
+        <nav class="menu">
+            <a href="#">Inicio</a>
+            <a href="{% url 'metrica' %}">Alertas y Reportes</a>
+            <a href="#">Stock</a>
+            <a href="{% url 'clientes'%}" class="active">Clientes</a>
+        </nav>
+    </header>
+
+
+    <!-- CONTENIDO -->
+   <main class="container">
+
+        <h1>Ver Clientes</h1>
+
+        <!-- BARRA DE BÚSQUEDA Y FILTROS (Ahora es un form) -->
+        <form method="GET" class="search-bar">
+            <!-- Input de búsqueda -->
+            <input type="text" name="q" placeholder="Buscar por nombre, RUT..." value="{{ request.GET.q|default:'' }}">
+
+            <!-- Filtro de País -->
+            <select name="filtro_pais" onchange="this.form.submit()" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-right: 5px;">
+                <option value="">Todos los países</option>
+                {% for pais in paises %}
+                    <option value="{{ pais }}" {% if request.GET.filtro_pais == pais %}selected{% endif %}>
+                        {{ pais }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Filtro de Orden -->
+            <select name="orden" onchange="this.form.submit()" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-right: 5px;">
+                <option value="">Ordenar por...</option>
+                <option value="az" {% if request.GET.orden == 'az' %}selected{% endif %}>Nombre (A-Z)</option>
+                <option value="za" {% if request.GET.orden == 'za' %}selected{% endif %}>Nombre (Z-A)</option>
+                <option value="nuevo" {% if request.GET.orden == 'nuevo' %}selected{% endif %}>Más recientes</option>
+                <option value="antiguo" {% if request.GET.orden == 'antiguo' %}selected{% endif %}>Más antiguos</option>
+            </select>
+
+            <button type="submit" class="icon-btn">🔍</button>
+
+            <a class="add-btn" href="{% url 'registrarCliente' %}" style="text-decoration: none;">+ Registrar</a>
+        </form>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>RUT</th>
+                        <th>País</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- BUCLE DE DJANGO: Repite esto por cada cliente en la BD -->
+                    {% for c in clientes %}
+                    <tr>
+                        <td>{{ c.nombre }}</td>
+                        <td>{{ c.apellido }}</td>
+                        <td>{{ c.rut }}</td>
+                        <td>{{ c.pais }}</td>
+                        <td>{{ c.correo }}</td>
+                        <td>{{ c.telefono }}</td>
+                        <td>
+                            <!-- Botones de acción (Editaremos esto más adelante si quieres) -->
+                            <button style="border:none; background:transparent; cursor:pointer;">⋮</button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <!-- Esto sale si no hay resultados -->
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 20px;">
+                            No se encontraron clientes registrados.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Contador de resultados simple -->
+        <p class="result-text">Mostrando {{ clientes.count }} resultados</p>
+
+    </main>
+
+</body>
+</html>

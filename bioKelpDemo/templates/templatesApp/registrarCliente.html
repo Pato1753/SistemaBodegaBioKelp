@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nuevo Cliente</title>
+    <link rel="stylesheet" href="{% static 'css/registrarCliente.css' %}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <!-- agregar una imagen de logo -->
+          <span>Biokelp</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="{% url 'clientes' %}" class="active">Clientes</a>
+            <a href="{% url 'metrica' %}">Alertas y reportes</a>
+            <a href="#">Stock</a>
+            
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+<main class="container">
+    <h1 class="titulo">Registrar Nuevo Cliente</h1>
+    <p class="subtitulo">Ingrese los datos del cliente para agregarlo al sistema.</p>
+
+    <section class="card">
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div style="background-color: #ffcccc; color: #cc0000; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                    <p><strong>Por favor corrija los siguientes errores:</strong></p>
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="input-group">
+                    <label>Nombre</label>
+                    {{ form.nombre }} <span style="color:red; font-size: 0.8em;">{{ form.nombre.errors }}</span>
+                </div>
+
+                <div class="input-group">
+                    <label>Apellido</label>
+                    {{ form.apellido }}
+                    <span style="color:red; font-size: 0.8em;">{{ form.apellido.errors }}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label>RUT</label>
+                    {{ form.rut }}
+                    <span style="color:red; font-size: 0.8em;">{{ form.rut.errors }}</span>
+                </div>
+
+                <div class="input-group">
+                    <label>País</label>
+                    <div class="custom-select">
+                        {{ form.pais }}
+                    </div>
+                    <span style="color:red; font-size: 0.8em;">{{ form.pais.errors }}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label>Correo</label>
+                    {{ form.correo }}
+                    <span style="color:red; font-size: 0.8em;">{{ form.correo.errors }}</span>
+                </div>
+
+                <div class="input-group">
+                    <label>Teléfono</label>
+                    {{ form.telefono }}
+                    <span style="color:red; font-size: 0.8em;">{{ form.telefono.errors }}</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="botones">
+                <a href="{% url 'verCliente' %}" class="cancelar" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">Cancelar</a>
+                <button type="submit" class="registrar">Registrar Cliente</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>

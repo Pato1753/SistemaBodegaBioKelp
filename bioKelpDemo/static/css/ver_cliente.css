@@ -1,0 +1,198 @@
+/* Estilos para el menú de acciones */
+.action-container {
+    position: relative;
+    display: inline-block;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+.dropdown-menu {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    text-align: left;
+}
+
+.dropdown-menu a:hover {background-color: #f1f1f1;}
+
+/* Clase para mostrar el menú */
+.show {display: block;}
+
+/* Color rojo para eliminar */
+.btn-eliminar { color: #d9534f !important; }
+
+/* GENERAL */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7f6;
+    color: #202020;
+}
+
+/* NAV */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 40px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    gap: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+}
+
+.menu a.active {
+    color: #5fb28b;
+    font-weight: bold;
+}
+
+/* CONTENIDO */
+.container {
+    padding: 40px 70px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+/* SEARCH BAR */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+.icon-btn {
+    background: #f1f2f3;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-btn {
+    background: #a8d5ba;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* TABLA */
+.table-wrapper {
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f7f9fa;
+}
+
+th {
+    text-align: left;
+    padding: 14px;
+    font-size: 15px;
+    color: #555;
+}
+
+td {
+    padding: 14px;
+    font-size: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* RESULTADOS */
+.result-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #444;
+}
+
+/* PAGINACIÓN */
+.pagination {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #d9eedf;
+    border-color: #b8dbca;
+}
+
+.pagination span {
+    padding: 0 6px;
+}

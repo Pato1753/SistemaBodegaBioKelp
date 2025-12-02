@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from bioKelpApp.views import renderTMetrica
+from bioKelpApp.views import renderTMetrica, renderClientes, renderVerClientes, renderRegistrarClientes, eliminarCliente
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('metrica/', renderTMetrica)
+    path('metrica/', renderTMetrica, name = "metrica"),
+    path('clientes/', renderClientes, name = "clientes"),
+    path('ver-cliente', renderVerClientes, name = "verCliente"),
+    path('registrar-cliente', renderRegistrarClientes, name = "registrarCliente"),
+    path('eliminar-cliente/<int:id>/', eliminarCliente, name='eliminarCliente'),
 ]
