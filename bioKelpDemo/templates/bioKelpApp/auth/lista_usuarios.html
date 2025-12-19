@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de usuarios</h2>
+
+<table>
+    <tr>
+        <th>Usuario</th>
+        <th>Activo</th>
+        <th>Grupos</th>
+    </tr>
+    {% for u in usuarios %}
+    <tr>
+        <td>{{ u.username }}</td>
+        <td>{{ u.is_active }}</td>
+        <td>
+            {% for g in u.groups.all %}
+                {{ g.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                Sin grupo
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

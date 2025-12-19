@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Actualizar etapas del lote</h2>
+
+<p><strong>Lote:</strong> {{ lote.codigo }}</p>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <p>
+        {{ form.fecha_cosecha.label_tag }}<br>
+        {{ form.fecha_cosecha }}
+    </p>
+
+    <p>
+        {{ form.fecha_almacenamiento.label_tag }}<br>
+        {{ form.fecha_almacenamiento }}
+    </p>
+
+    <p>
+        {{ form.fecha_procesamiento.label_tag }}<br>
+        {{ form.fecha_procesamiento }}
+    </p>
+
+    <button type="submit">Guardar</button>
+</form>
+
+{% endblock %}

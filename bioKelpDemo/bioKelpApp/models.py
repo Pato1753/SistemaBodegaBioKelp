@@ -2,7 +2,7 @@
 # Create your models here.
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import Group, Permission
 
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
@@ -273,3 +273,13 @@ class Alerta(models.Model):
         especie_nombre = self.especie.nombre if self.especie else 'Sin especie'
         return f'{self.nivel.upper()} - {especie_nombre} - {self.mensaje[:40]}'
 
+class Permiso(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+
+class RolPermiso(models.Model):
+    rol = models.CharField(max_length=20)
+    permiso = models.ForeignKey(Permiso, on_delete=models.CASCADE)
+    
+
+    
+    

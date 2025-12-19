@@ -13,17 +13,32 @@
             color: white;
             padding: 10px;
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-evenly;
         }
         a {
             color: #1e6f5c;
             font-weight: bold;
         }
+
     </style>
 </head>
 <body>
-
 <header>
-    <h1>Sistema de Trazabilidad BioKelp</h1>
+    {% if user.is_authenticated %}
+
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Cerrar sesión</button>
+    </form>
+        <p>
+        Usuario: {{ user.username }}
+        <h1>Sistema de Trazabilidad BioKelp</h1>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </p>
+    {% else %}
+        <h1>Sistema de Trazabilidad BioKelp</h1>
+    {% endif %}
 </header>
     <a href="{% url 'clientes' %}" class="active">Clientes</a>
     <a href="{% url 'metrica' %}">Alertas y reportes</a>
@@ -33,3 +48,4 @@
 
 </body>
 </html>
+

@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from bioKelpApp.views import renderTMetrica, renderClientes, renderVerClientes, renderRegistrarClientes, eliminarCliente
 
+#bioKelpDemo/urls.py
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bioKelpApp.urls')),

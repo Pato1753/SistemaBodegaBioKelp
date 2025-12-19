@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<h2 class>Registrar usuario</h2>
+
+{% if error %}
+<p style="color: red">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <p>
+    Usuario<br />
+    <input type="text" name="username" />
+  </p>
+
+  <p>
+    Contraseña<br />
+    <input type="password" name="password" />
+  </p>
+
+  <p>
+    Rol<br />
+    <select name="grupo">
+      {% for grupo in grupos %}
+      <option value="{{ grupo.name }}">{{ grupo.name }}</option>
+      {% endfor %}
+    </select>
+  </p>
+
+  <button type="submit">Registrar</button>
+</form>
+
+{% endblock %}

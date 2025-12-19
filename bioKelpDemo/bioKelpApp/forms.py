@@ -1,5 +1,8 @@
 from django import forms
 from .models import Cliente, Lote, Movimiento, Especie, Planta
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
+from django.contrib.auth.forms import AuthenticationForm
 
 
 
@@ -214,3 +217,164 @@ class MovimientoForm(forms.ModelForm):
             mov.save()
 
         return mov
+
+from django import forms
+from django.core.exceptions import ValidationError
+from .models import Lote
+
+
+class EtapasLoteForm(forms.ModelForm):
+    class Meta:
+        model = Lote
+        fields = [
+            'fecha_cosecha',
+            'fecha_almacenamiento',
+            'fecha_procesamiento'
+        ]
+        widgets = {
+            'fecha_cosecha': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_almacenamiento': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_procesamiento': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        fecha_cosecha = cleaned_data.get('fecha_cosecha')
+        fecha_almacenamiento = cleaned_data.get('fecha_almacenamiento')
+        fecha_procesamiento = cleaned_data.get('fecha_procesamiento')
+
+        # 🔹 Escenario 2: Orden temporal de etapas
+        if fecha_cosecha and fecha_almacenamiento:
+            if fecha_almacenamiento < fecha_cosecha:
+                raise ValidationError(
+                    'La fecha de almacenamiento no puede ser anterior a la fecha de cosecha.'
+                )
+
+        if fecha_almacenamiento and fecha_procesamiento:
+            if fecha_procesamiento < fecha_almacenamiento:
+                raise ValidationError(
+                    'La fecha de procesamiento no puede ser anterior a la fecha de almacenamiento.'
+                )
+
+        return cleaned_data
+
+
+
+class EtapasLoteForm(forms.ModelForm):
+    class Meta:
+        model = Lote
+        fields = [
+            'fecha_cosecha',
+            'fecha_almacenamiento',
+            'fecha_procesamiento'
+        ]
+        widgets = {
+            'fecha_cosecha': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_almacenamiento': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_procesamiento': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        fecha_cosecha = cleaned_data.get('fecha_cosecha')
+        fecha_almacenamiento = cleaned_data.get('fecha_almacenamiento')
+        fecha_procesamiento = cleaned_data.get('fecha_procesamiento')
+
+        # 🔹 Escenario 2: Orden temporal de etapas
+        if fecha_cosecha and fecha_almacenamiento:
+            if fecha_almacenamiento < fecha_cosecha:
+                raise ValidationError(
+                    'La fecha de almacenamiento no puede ser anterior a la fecha de cosecha.'
+                )
+
+        if fecha_almacenamiento and fecha_procesamiento:
+            if fecha_procesamiento < fecha_almacenamiento:
+                raise ValidationError(
+                    'La fecha de procesamiento no puede ser anterior a la fecha de almacenamiento.'
+                )
+
+User = get_user_model()
+
+
+class RegistroUsuarioForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    grupo = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        required=True
+    )
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('El usuario ya existe')
+        return username
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label='Usuario')
+    password = forms.CharField(widget=forms.PasswordInput)
+
+from django import forms
+from .models import Produccion
+
+class ProduccionForm(forms.ModelForm):
+    class Meta:
+        model = Produccion
+        fields = [
+            'tipo_alga',
+            'cantidad_humeda',
+            'cantidad_seca',
+            'fecha_cosecha'
+        ]
+
+    def clean(self):
+        cleaned = super().clean()
+
+        ch = cleaned.get('cantidad_humeda', 0)
+        cs = cleaned.get('cantidad_seca', 0)
+
+        if ch <= 0 and cs <= 0:
+            raise forms.ValidationError(
+                'Debe ingresar una cantidad válida'
+            )
+
+        return cleaned
+
+
+from django import forms
+from .models import Lote
+from django.core.exceptions import ValidationError
+
+
+class EtapasLoteForm(forms.ModelForm):
+    class Meta:
+        model = Lote
+        fields = [
+            'fecha_cosecha',
+            'fecha_almacenamiento',
+            'fecha_procesamiento'
+        ]
+
+    def clean(self):
+        cleaned = super().clean()
+
+        fc = cleaned.get('fecha_cosecha')
+        fa = cleaned.get('fecha_almacenamiento')
+        fp = cleaned.get('fecha_procesamiento')
+
+        if fc and fa and fa < fc:
+            raise ValidationError(
+                'La fecha de almacenamiento no puede ser anterior a la cosecha'
+            )
+
+        if fa and fp and fp < fa:
+            raise ValidationError(
+                'La fecha de procesamiento no puede ser anterior al almacenamiento'
+            )
+
+        return cleaned
