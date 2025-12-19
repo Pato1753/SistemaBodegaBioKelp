@@ -1,37 +1,38 @@
 {% extends "base.html" %}
-{% block content %}
 
+{% block content %}
 <h2>Historial del lote {{ lote.codigo }}</h2>
 
 {% if movimientos %}
-  <table border="1" cellpadding="6">
+<table>
     <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Tipo</th>
-        <th>Húmedo (kg)</th>
-        <th>Seco (kg)</th>
-        <th>Descripción</th>
-      </tr>
+        <tr>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Húmedo (kg)</th>
+            <th>Seco (kg)</th>
+            <th>Descripción</th>
+        </tr>
     </thead>
     <tbody>
-      {% for m in movimientos %}
+        {% for m in movimientos %}
         <tr>
-          <td>{{ m.fecha }}</td>
-          <td>{{ m.get_tipo_display }}</td>
-          <td>{{ m.cantidad_humedo_kg }}</td>
-          <td>{{ m.cantidad_seco_kg }}</td>
-          <td>{{ m.descripcion }}</td>
+            <td>{{ m.fecha }}</td>
+            <td>{{ m.get_tipo_display }}</td>
+            <td>{{ m.cantidad_humedo_kg }}</td>
+            <td>{{ m.cantidad_seco_kg }}</td>
+            <td>{{ m.descripcion }}</td>
         </tr>
-      {% endfor %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 {% else %}
-  <p>No hay movimientos registrados para este lote.</p>
+<p>No hay movimientos registrados para este lote.</p>
 {% endif %}
 
 <br>
+
 <a href="{% url 'detalle_lote' lote.id %}" class="btn">⬅ Volver</a>
-<a href="{% url 'lista_lotes' %}" class="btn" style="margin-left:8px;">Inicio</a>
+<a href="{% url 'lista_lotes' %}" class="btn">Inicio</a>
 
 {% endblock %}

@@ -1,33 +1,14 @@
 {% extends "base.html" %}
-{% block content %}
 
+{% block content %}
 <h2>{{ titulo }}</h2>
 
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
+    {% csrf_token %}
+    {{ form.as_p }}
 
-  <button type="submit">Guardar</button>
-
-  <a href="{% url 'lista_lotes' %}" class="btn">
-    ⬅ Volver
-  </a>
+    <button type="submit">Guardar</button>
+    <a href="{% url 'lista_lotes' %}" class="btn">⬅ Volver</a>
 </form>
-
-<style>
-.btn {
-  display:inline-block;
-  padding:8px 14px;
-  background:#f0f0f0;
-  border:1px solid #ccc;
-  border-radius:6px;
-  text-decoration:none;
-  color:#333;
-  margin-left: 10px;
-}
-.btn:hover {
-  background:#e0e0e0;
-}
-</style>
 
 {% endblock %}

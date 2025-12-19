@@ -1,28 +1,41 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h2>Lista de Lotes</h2>
-<p><a href="{% url 'crear_lote' %}">Crear Lote</a> | <a href="{% url 'registrar_movimiento' %}">Registrar Movimiento</a></p>
+
+<p>
+    <a href="{% url 'crear_lote' %}" class="btn">Crear Lote</a>
+    <a href="{% url 'registrar_movimiento' %}" class="btn">Registrar Movimiento</a>
+</p>
+
 <table>
-  <thead>
-    <tr><th>Código</th><th>Especie</th><th>Origen</th><th>Humedo (kg)</th><th>Seco (kg)</th><th>Acciones</th></tr>
-  </thead>
-  <tbody>
-    {% for lote in lotes %}
-    <tr>
-      <td>{{ lote.codigo }}</td>
-      <td>{{ lote.especie.nombre }}</td>
-      <td>{{ lote.origen.nombre }}</td>
-      <td>{{ lote.cantidad_humedo_kg }}</td>
-      <td>{{ lote.cantidad_seco_kg }}</td>
-      <td>
-        <a href="{% url 'detalle_lote' lote.id %}">Ver</a> |
-        <a href="{% url 'editar_lote' lote.id %}">Editar</a>
-      </td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="6">No hay lotes</td></tr>
-    {% endfor %}
-  </tbody>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Especie</th>
+            <th>Origen</th>
+            <th>Húmedo (kg)</th>
+            <th>Seco (kg)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lote in lotes %}
+        <tr>
+            <td>{{ lote.codigo }}</td>
+            <td>{{ lote.especie.nombre }}</td>
+            <td>{{ lote.origen.nombre }}</td>
+            <td>{{ lote.cantidad_humedo_kg }}</td>
+            <td>{{ lote.cantidad_seco_kg }}</td>
+            <td>
+                <a href="{% url 'detalle_lote' lote.id %}">Ver</a> |
+                <a href="{% url 'editar_lote' lote.id %}">Editar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No hay lotes</td></tr>
+        {% endfor %}
+    </tbody>
 </table>
+
 {% endblock %}
-    

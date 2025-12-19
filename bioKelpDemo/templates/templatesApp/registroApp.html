@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biokelp - Login</title>
+    <link rel="stylesheet" href="{% url 'lista_lotes' %}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Biokelp</h1>
+
+        <form class="login-form">
+            <input type="text" placeholder="Username">
+
+            <input type="password" placeholder="Password">
+
+            <button type="submit">Login</button>
+
+            <a href="#" class="forgot">Forgot your password?</a>
+        </form>
+    </div>
+
+</body>
+</html>

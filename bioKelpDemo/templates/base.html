@@ -1,35 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>BioKelp</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        header {
-            background: #1e6f5c;
-            color: white;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-        a {
-            color: #1e6f5c;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
+
 <body>
 
-<header>
-    <h1>Sistema de Trazabilidad BioKelp</h1>
-</header>
-    <a href="{% url 'clientes' %}" class="active">Clientes</a>
-    <a href="{% url 'metrica' %}">Alertas y reportes</a>
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-left">
+        <img src="{% static 'img/logo.png' %}" alt="Biokelp" class="logo">
+        <span class="brand">Biokelp</span>
+    </div>
 
-{% block content %}
-{% endblock %}
+    <nav class="nav-center">
+        <a href="{% url 'clientes' %}">Clientes</a>
+        <a href="{% url 'metrica' %}">Alertas</a>
+        <a href="{% url 'metrica' %}">Reportes</a>
+    </nav>
+</header>
+
+<!-- CONTENIDO -->
+<main class="page-content">
+    {% block content %}
+    {% endblock %}
+</main>
 
 </body>
 </html>

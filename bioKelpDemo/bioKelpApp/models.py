@@ -127,7 +127,7 @@ class Produccion(models.Model):
         db_table = 'produccion'
 
 
-class Alerta(models.Model):
+class AlertaStock(models.Model):
     # Diagrama: PK int id_alerta
     id_alerta = models.AutoField(primary_key=True)
     # Diagrama: string tipo_alerta, mensaje, estado
@@ -143,7 +143,7 @@ class Alerta(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE, null=True, blank=True, related_name='alertas')
 
     class Meta:
-        db_table = 'alerta'
+        db_table = 'alerta_stock'
 
 
 class LogAuditoria(models.Model):

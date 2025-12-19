@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from bioKelpApp.views import renderTMetrica, renderClientes, renderVerClientes, renderRegistrarClientes, eliminarCliente
+from bioKelpApp.views import renderTMetrica, renderClientes, renderVerClientes, renderRegistrarClientes, eliminarCliente, renderRegistroApp
 
 urlpatterns = [
     path('admin/', admin.site.urls),

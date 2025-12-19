@@ -204,3 +204,9 @@ def historial_por_especie(request, especie_id):
         'stock': stock,
         'titulo': f'Historial: {especie.nombre}',
     })
+
+
+
+
+def renderRegistroApp(request):
+    return render(request, 'templatesApp/registroApp.html')
